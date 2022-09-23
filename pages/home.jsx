@@ -18,7 +18,7 @@ const Home = (props) => {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    It is Home
+                    It's Home
                 </h1>
 
                 <div className={styles.grid}>

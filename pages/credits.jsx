@@ -15,7 +15,7 @@ const Credits = () => {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    It is Credits
+                    It's Credits
                 </h1>
 
                 {/* <div className={styles.grid}>

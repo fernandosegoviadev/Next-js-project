@@ -11,7 +11,7 @@ const Index = () => {
         </Head>
 
         <h2>Landing page</h2>
-        <p>It is the landing page.</p>
+        <p>It's the landing page.</p>
       </Container>
 
 
