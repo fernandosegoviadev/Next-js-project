@@ -15,11 +15,11 @@ const Credits = () => {
 
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    It's Credits
+                    It is Credits
                 </h1>
 
-                <div className={styles.grid}>
-                </div>
+                {/* <div className={styles.grid}>
+                </div> */}
             </main>
 
             <footer className={styles.footer}>
