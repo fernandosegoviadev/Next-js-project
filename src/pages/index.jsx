@@ -9,11 +9,9 @@ const Index = () => {
         <Head>
           <title>Landing page</title>
         </Head>
-
         <h2>Landing page</h2>
         <p>It's the landing page.</p>
       </Container>
-
 
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -21,13 +19,13 @@ const Index = () => {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+         Please click the button<code className={styles.code}>Home</code>
+         to start
         </p>
-
+{/* 
         <div className={styles.grid}>
           <h2>Deploy is running</h2>
-        </div>
+        </div> */}
       </main>
 
       <footer className={styles.footer}>
