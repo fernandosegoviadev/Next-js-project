@@ -91,7 +91,7 @@ const Videos = ({ videos }) => {
     return (
         <ul className="list-group">
             {
-                select && (
+                select && select.data && (
                     <li className="list-group-item list-group-item-action"
                         key={select.data._id}
                     >
