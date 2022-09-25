@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import React from "react";
-import "plyr/dist/plyr.css";
+
 
 const Videos = ({ videos }) => {
     console.log(videos, 'props en videos')
