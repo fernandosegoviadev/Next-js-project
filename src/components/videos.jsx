@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import React from "react";
-// import Plyr from "plyr-react";
 import "plyr/dist/plyr.css";
 
 const Videos = ({ videos }) => {
-    // console.log(props, 'props en videos')
+    console.log(videos, 'props en videos')
 
     const [select, setSelect] = useState(null);
     const [muted, setMuted] = useState(true); // para saltar la validación
+    const [fullscreen, setFullscreen] = useState(false);
     // de auto reproducción con sonido activado
 
     useEffect(() => {
@@ -43,128 +43,145 @@ const Videos = ({ videos }) => {
         }
     }
 
-
-
-
-    const videoSource = {
-
-        type: "video",
-        sources: [{ src: "6FgF7hKwcao", provider: "youtube" }],
-        muted: true,
-
-        // https://github.com/sampotts/plyr#the-source-setter
-    };
-
-    const videoOptions = {
-        autoplay: true,
-        muted: false,
-        fullscreen: {
-            enabled: true,
-            fallback: true,
-            iosNative: false,
-            container: null
-        },
-
-    };
-    const ref = React.useRef(null);
-
     const changeMuted = () => {
         if (muted) return setMuted(false);
         if (!muted) return setMuted(true);
     }
 
-    const changeFullScreen = () => {
+    const fullScreen = () => {
         // element which needs to enter full-screen mode
         var element = document.getElementById("container-video");
         // console.log(element)
         // make the element go to full-screen mode
+
         element.requestFullscreen()
             .then(function () {
                 // element has entered fullscreen mode successfully
+                setFullscreen(true)
+            })
+            .catch(function (error) {
+                // element could not enter fullscreen mode
+            });
+    }
+    const exitFullScreen = () => {
+        document.exitFullscreen()
+            .then(function () {
+                // element has entered fullscreen mode successfully
+                setFullscreen(false)
             })
             .catch(function (error) {
                 // element could not enter fullscreen mode
             });
     }
 
+    // Insertar vídeos en HTML5. La etiqueta ˂video˃ | | UPV - Elementos de la etiqueta video
+    // https://www.youtube.com/watch?v=yHyj6o56AlM&ab_channel=UniversitatPolit%C3%A8cnicadeVal%C3%A8ncia-UPV
 
     return (
-        <ul className="list-group">
-            {
-                select && select.data && (
-                    <li className="list-group-item list-group-item-action"
-                        key={select.data._id}
-                    >
-                        <h5>{select.data.title} {select.index}  </h5>
+        <div className="list-group">
+            <div id="container-video"
+                style={{
+                    width: "300px", height: "150px", left: "0px", top: "0px",
+                    justifyContent: "center", textAlign: "center", position: "relative"
+                }}>
 
-                        {/* <img src={select.data.url} alt={select.data.title}
-                            style={{ width: "150px", height: "300px" }} /> */}
+                {
+                    select && select.data && (
+                        <div className="list-group-item list-group-item-action"
+                            style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
+                            key={select.data._id}
+                        >
+                            <div>
+                                <div style={{
+                                    zIndex: 1, position: "absolute", minWidth: "100%"
+                                }}>
+                                    <h5
+                                    >{select.data.title} {select.index}  </h5>
 
-                        <video id="container-video" tabIndex="-1" className="video-stream html5-main-video"
-                            controlsList="nodownload"
-                            style={{ width: "600px", height: "300px", left: "0px", top: "0px" }}
-                            autoPlay={true}
-                            controls={true}
-                            muted={muted}
-                            // fullscreen={(e)=>console.log(e, 'de fullscreen')}
+                                    <h6
+                                    >Description: {select.data.description}</h6>
+                                </div>
 
-                            src={select.data.url}
-                        ></video>
+                                <div style={{
+                                    zIndex: 1, position: "absolute", top: "90%", minWidth: "100%"
+                                }}>
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={setPrev}
+                                    >Prev</button>
 
-                        <p>Description: {select.data.description}</p>
-                    </li>
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={changeMuted}
+                                    >Mute</button>
 
-                )
-            }
-            <button type="button"
-                className="btn btn-outline-primary"
-                onClick={setPrev}
-            >Prev</button>
+                                    {fullscreen &&
+                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                            className="btn btn-outline-primary"
+                                            onClick={exitFullScreen}
+                                        >Exit</button>}
 
-            <button type="button"
-                className="btn btn-outline-primary"
-                onClick={setNext}
-            >Next</button>
-            <button type="button"
-                className="btn btn-outline-primary"
-                onClick={changeMuted}
-            >Mute</button>
-            <button type="button"
-                className="btn btn-outline-primary"
-                onClick={changeFullScreen}
-            >Fullscreen</button>
+                                    {!fullscreen &&
+                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                            className="btn btn-outline-primary"
+                                            onClick={fullScreen}
+                                        >Fullscreen</button>}
 
-            {/* <Plyr
-                // ref={ref}
-                source={videoSource}
-                options={videoOptions}                              
-            /> */}
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={setNext}
+                                    >Next</button>
+                                </div>
 
-            {/* <video className="vjs-tech" 
-            id="vjs_video_3_html5_api" 
-            tabIndex="-1" role="application" 
-            preload="metadata" 
-            src="https://dms.licdn.com/playlist/C4D10AQGDOAEKlEtJjg/mp4-720p-30fp-crf28/0/1659122822530/RaghsaOficinas2mp4?e=1664632800&amp;v=beta&amp;t=BPaY77EEmAD5b-TPylFzJ5xwCX_iGp_HC9a5HvXu-JQ" 
-            autoPlay="true"
-            controls="true"
-            muted="true">
-            </video> */}
+                                <video tabIndex="-1" className="video-stream html5-main-video"
+                                    controlsList="nodownload"
+                                    style={{
+                                        maxWidth: "100%", MaxHeight: "100%",
+                                        minHeight: "100%", left: "0px",
+                                        top: "0px"
+                                    }}
+                                    autoPlay={true}
+                                    controls={true}
+                                    muted={muted}
+                                    src={select.data.url}
+                                >
 
-            {/* <video tabIndex="-1" className="video-stream html5-main-video"
-                controlsList="nodownload"
-                style={{ width: "427px", height: "240px", left: "0px", top: "0px" }}
-                autoPlay={true}
-                controls={true}
-                muted={true}
-                // fullscreen={value.toString()}
-                // src="https://dms.licdn.com/playlist/C4D10AQGDOAEKlEtJjg/mp4-720p-30fp-crf28/0/1659122822530/RaghsaOficinas2mp4?e=1664632800&amp;v=beta&amp;t=BPaY77EEmAD5b-TPylFzJ5xwCX_iGp_HC9a5HvXu-JQ"
-                // src="https://v16-webapp.tiktok.com/2173c51d4bb4477e860f6fad36894c6a/632f294e/video/tos/useast2a/tos-useast2a-ve-0068c003/f9e551fdc3324c21b127f4dc553f90dc/?a=1988&amp;ch=0&amp;cr=0&amp;dr=0&amp;lr=tiktok_m&amp;cd=0%7C0%7C0%7C0&amp;br=3536&amp;bt=1768&amp;cs=0&amp;ds=3&amp;ft=gKSYZ826o0PD13Pm~yg9wOp2O5LiaQ2D~7S&amp;mime_type=video_mp4&amp;qs=0&amp;rc=NDhpNWY5ODM4Njo8PDNnNUBpam1xOGk6Zjo7ZjMzNzczM0BhMTBjYDE2XzUxYjMuMzJhYSNkYWJgcjRvNmpgLS1kMTZzcw%3D%3D&amp;l=20220924145845010189073045246984FF&amp;btag=80000"
-                src="https://v16-webapp.tiktok.com/2173c51d4bb4477e860f6fad36894c6a/632f294e/video/tos/useast2a/tos-useast2a-ve-0068c003/f9e551fdc3324c21b127f4dc553f90dc/"
-            >
+                                </video>
 
-            </video> */}
+                            </div>
 
-        </ul>
+                        </div>
+
+                    )
+                }
+
+            </div>
+            
+            {/* <button style={{position: "absolute"}}
+            Name="ytp-fullscreen-button ytp-button" 
+            aria-keyshortcuts="f"
+            data-title-no-tooltip="Salir del modo de pantalla completa" 
+            aria-label="Salir del modo de pantalla completa keyboard shortcut f" 
+            title="Salir del modo de pantalla completa&nbsp;(f)"><svg 
+            height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                <g className="ytp-fullscreen-button-corner-2">
+                    <use className="ytp-svg-shadow" xlinkHref="#ytp-id-285">
+                        </use><path className="ytp-svg-fill" d="m 14,14 -4,0 0,2 6,0 0,-6 -2,0 0,4 0,0 z" 
+                        id="ytp-id-285"></path></g>
+                        <g className="ytp-fullscreen-button-corner-3">
+                            <use className="ytp-svg-shadow" xlinkHref="#ytp-id-286">
+                                </use><path className="ytp-svg-fill" d="m 22,14 0,-4 -2,0 0,6 6,0 0,-2 -4,0 0,0 z" 
+                                id="ytp-id-286"></path></g><g className="ytp-fullscreen-button-corner-0">
+                                    <use className="ytp-svg-shadow" xlinkHref="#ytp-id-287"></use>
+                                    <path className="ytp-svg-fill" d="m 20,26 2,0 0,-4 4,0 0,-2 -6,0 0,6 0,0 z" 
+                                    id="ytp-id-287"></path></g><g className="ytp-fullscreen-button-corner-1">
+                                        <use className="ytp-svg-shadow" xlinkHref="#ytp-id-288"></use><path 
+                                        class="ytp-svg-fill" d="m 10,22 4,0 0,4 2,0 0,-6 -6,0 0,2 0,0 z" 
+                                        id="ytp-id-288"></path></g></svg></button> */}
+
+                      
+
+        </div>
     )
 }
 
