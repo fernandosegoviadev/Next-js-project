@@ -46,13 +46,13 @@ const Medias = ({ videos }) => {
                 }}
                 className="mySwiper"
                 onActiveIndexChange={(e)=> console.log(e)}
-                // onPaginationRender={(e)=> console.log(e)}
+               
                 >
 
                 {videos && videos.length &&
                     videos.map((video) => {
                         return (
-                            <SwiperSlide>
+                            <SwiperSlide key={video._id}>
                                 <VideoPlayer video={video} />
                             </SwiperSlide>
                         )

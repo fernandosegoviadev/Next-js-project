@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
 
 import SwiperCore, {
     EffectCoverflow,
@@ -45,22 +46,23 @@ const Photos = () => {
                 className="mySwiper">
 
                 <SwiperSlide>
-                    <img src={photos[0]} alt="" />
+                    <Image src={photos[0]} alt=""  width={500}
+      height={500}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={photos[1]} alt="" />
+                    <Image src={photos[1]} alt="" layout="fill"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={photos[2]} alt="" />
+                    <Image src={photos[2]} alt="" layout="fill"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={photos[3]} alt="" />
+                    <Image src={photos[3]} alt="" layout="fill"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={photos[4]} alt="" />
+                    <Image src={photos[4]} alt="" layout="fill"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={photos[5]} alt="" />
+                    <Image src={photos[5]} alt="" layout="fill"/>
                 </SwiperSlide>
 
             </Swiper>
