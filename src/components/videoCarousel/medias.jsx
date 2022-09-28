@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import VideoPlayer from "./videoPlayer";
 
@@ -11,25 +11,51 @@ import SwiperCore, {
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
-const photos = [
-    "https://images8.alphacoders.com/541/541822.jpg",
-    "https://images8.alphacoders.com/359/359681.jpg",
-    "https://images.alphacoders.com/471/471270.jpg",
-    "https://images5.alphacoders.com/101/1011818.jpg",
-    "https://images4.alphacoders.com/829/829688.jpg",
-    "https://images4.alphacoders.com/984/984566.jpg"
-]
-
-
 const Medias = ({ videos }) => {
     // console.log(videos, 'props en videos')
+    const [muted, setMuted] = useState(false);
+    const [fullscreen, setFullscreen] = useState(false);
+    const [onPlay, setOnPlay] = useState({ state: false, id: '' });
 
-    const size = useWindowSize();
+    const pause = (id) => {
+        var video = document.getElementById(id);
+        if (video) {
+            video.pause();
+            setOnPlay({ state: false, id: id });
+        }
+    }
+    const play = (id) => {
+        console.log(id, 'el id que llega')
+        var video = document.getElementById(id);
+        if (video) {
+            video.play();
+            setOnPlay({ state: true, id: id });
+
+        }
+    }
+
+    const changeVideo = (index) => {
+        if (onPlay.state) {
+            console.log(index,' el index');
+    
+            if (onPlay.state && onPlay.id) {
+                pause(onPlay.id);
+            }        
+    
+            let id = videos[index]._id // el id
+            play(id);
+            setOnPlay({state: true, id: id})
+
+        }
+
+    }
+
     // Events para Swiper, muy interesante!
     // https://swiperjs.com/swiper-api#events
     return (
-        <div className="container" id="play-video">           
+        <div className="container" >
             <Swiper
+                id="play-video"
                 navigation={true}
                 effect={"coverflow"}
                 centeredSlides={true}
@@ -45,15 +71,21 @@ const Medias = ({ videos }) => {
                     clickable: true
                 }}
                 className="mySwiper"
-                onActiveIndexChange={(e)=> console.log(e)}
-               
-                >
-
+                onActiveIndexChange={(e) => changeVideo(e.realIndex)}
+            >
                 {videos && videos.length &&
                     videos.map((video) => {
                         return (
                             <SwiperSlide key={video._id}>
-                                <VideoPlayer video={video} />
+                                <VideoPlayer
+                                    video={video}
+                                    muted={muted}
+                                    setMuted={setMuted}
+                                    fullscreen={fullscreen}
+                                    setFullscreen={setFullscreen}
+                                    onPlay={onPlay}
+                                    setOnPlay={setOnPlay}
+                                />
                             </SwiperSlide>
                         )
                     })
@@ -64,27 +96,7 @@ const Medias = ({ videos }) => {
     )
 }
 
-// Hook
-function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
-    });
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            function handleResize() {
-                setWindowSize({
-                    width: window.innerWidth,
-                    height: window.innerHeight,
-                });
-            }
-            window.addEventListener("resize", handleResize);
-            handleResize();
-            return () => window.removeEventListener("resize", handleResize);
-        }
-    }, []);
-    return windowSize;
-}
+
 
 
 export default Medias;

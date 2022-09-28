@@ -33,7 +33,6 @@ Home.getInitialProps = async (ctx) => {
     const videos = await axios.get('/api/videos')
         .then((response) => response.data)
         .catch((errors) => errors.data)
-    // console.log(videos, 'promise response')
     return { videos: videos.data }
 }
 

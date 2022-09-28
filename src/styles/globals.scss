@@ -36,7 +36,8 @@ a {
 }
 
 .play-video {
-  height: 400px;
+  min-height: auto;
+  max-height: auto;
   justify-content: center;
   text-align: center;
   align-items: center;
