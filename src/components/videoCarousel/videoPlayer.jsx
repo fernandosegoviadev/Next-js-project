@@ -4,7 +4,7 @@ import React from "react";
 
 
 const VideoPlayer = ({
-    video, muted, setMuted, fullscreen, setFullscreen, onPlay, setOnPlay
+    video, muted, setMuted, fullscreen, setFullscreen, onPlay, setOnPlay,
     }) => {
     // console.log(video, 'video por props')
 
@@ -107,7 +107,7 @@ const VideoPlayer = ({
                         maxWidth: "100%", height: "100%",
                         left: "0px", top: "0px"
                     }}
-                    autoPlay={false}
+                    autoPlay={true}
                     controls={false}
                     loop={true}
                     muted={muted}

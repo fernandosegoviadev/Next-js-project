@@ -13,9 +13,10 @@ SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 const Medias = ({ videos }) => {
     // console.log(videos, 'props en videos')
-    const [muted, setMuted] = useState(false);
+    const [muted, setMuted] = useState(true);
     const [fullscreen, setFullscreen] = useState(false);
-    const [onPlay, setOnPlay] = useState({ state: false, id: '' });
+    const [onPlay, setOnPlay] = useState({ state: true, id: '' });
+
 
     const pause = (id) => {
         var video = document.getElementById(id);
@@ -35,6 +36,7 @@ const Medias = ({ videos }) => {
     }
 
     const changeVideo = (index) => {
+
         if (onPlay.state) {
             console.log(index,' el index');
     
@@ -85,6 +87,7 @@ const Medias = ({ videos }) => {
                                     setFullscreen={setFullscreen}
                                     onPlay={onPlay}
                                     setOnPlay={setOnPlay}
+                                 
                                 />
                             </SwiperSlide>
                         )
