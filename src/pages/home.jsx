@@ -15,9 +15,9 @@ const Home = (props) => {
             </Container>
 
             <main className={styles.main}>
-                <h3 className={styles.title}>
+                {/* <h3 className={styles.title}>
                     It's Home
-                </h3>
+                </h3> */}
 
                 <div className={styles.grid}>
                     <Videos videos={props.videos} />

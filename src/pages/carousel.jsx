@@ -14,9 +14,9 @@ const Carousel = () => {
             </Container>
             
             <main className={styles.main}>
-                <h3 className={styles.title}>
+                {/* <h3 className={styles.title}>
                     Carousel
-                </h3>
+                </h3> */}
                 <div className={styles.grid}>
                     <Photos />
                 </div>
