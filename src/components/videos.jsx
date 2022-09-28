@@ -100,20 +100,22 @@ const Videos = ({ videos }) => {
         <div className="list-group">
             <div id="container-video"
                 style={{
-                    width: "300px", height: "150px", left: "0px", top: "0px",
+                    width: "auto", height: "500px", left: "0px", top: "0px",
                     justifyContent: "center", textAlign: "center", position: "relative"
                 }}        
             >
 
                 {
                     select && select.data && (
-                        <div className="list-group-item list-group-item-action"
-                            style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
-                            key={select.data._id}
-                        >
-                            <div className="play-videos">
+                        // <div className="list-group-item list-group-item-action"
+                        //     style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
+                        //     key={select.data._id}
+                        // >
+                            <div className="play-videos" style={{
+                               minWidth: "100%", minHeight: "100%", maxHeight: "100 vh"
+                            }}>
                                 <div style={{
-                                    zIndex: 1, position: "absolute", minWidth: "100%"
+                                    zIndex: 1, position: "absolute", minWidth: "100%", minHeight: "100%",
                                 }}>
                                     <h5
                                     >{select.data.title} {select.index}  </h5>
@@ -175,8 +177,7 @@ const Videos = ({ videos }) => {
                                     id="videoBox"
                                     controlsList="nodownload"
                                     style={{
-                                        maxWidth: "100%", MaxHeight: "100%",
-                                        minHeight: "100%", left: "0px",
+                                        maxWidth: "100%", maxHeight:"100%", left: "0px",
                                         top: "0px"
                                     }}
                                     autoPlay={true}
@@ -191,7 +192,7 @@ const Videos = ({ videos }) => {
 
                             </div>
 
-                        </div>
+                        // </div>
 
                     )
                 }
