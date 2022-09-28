@@ -17,6 +17,16 @@ const Navigation = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link href="/carousel">
+                                <a className="nav-link">Carousel</a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href="/videoCarousel">
+                                <a className="nav-link">Video Carousel</a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link href="/credits">
                                 <a className="nav-link">Credits</a>
                             </Link>

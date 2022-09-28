@@ -1,9 +1,9 @@
-.container {
+.mainContainer {
   padding: 0 1rem;
 }
 
-.main {
-  min-height: 70vh;
+.mainContainer {
+  min-height: 80vh;
   padding: 1rem 0;
   padding-bottom: 3rem;
   flex: 1;
@@ -12,6 +12,7 @@
   justify-content: flex-start;
   align-items: center;
 }
+
 
 .footer {
   display: flex;
@@ -44,6 +45,8 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  padding: 3%;
+  padding-bottom: 7%
 }
 
 .title,

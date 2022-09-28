@@ -9,7 +9,16 @@ const Videos = ({ videos }) => {
     const [select, setSelect] = useState(null);
     const [muted, setMuted] = useState(true); // para saltar la validación
     const [fullscreen, setFullscreen] = useState(false);
+    const [onPlay, setOnPlay] = useState(true);
     // de auto reproducción con sonido activado
+
+    useEffect(() => {
+        function onFullscreenChange() {
+            setFullscreen(Boolean(document.fullscreenElement));
+        }
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+    }, []);
 
     useEffect(() => {
         if (videos && videos.length) {
@@ -50,11 +59,10 @@ const Videos = ({ videos }) => {
 
     const fullScreen = () => {
         // element which needs to enter full-screen mode
-        var element = document.getElementById("container-video");
+        var videoPlayer = document.getElementById("container-video");
         // console.log(element)
         // make the element go to full-screen mode
-
-        element.requestFullscreen()
+        videoPlayer.requestFullscreen()
             .then(function () {
                 // element has entered fullscreen mode successfully
                 setFullscreen(true)
@@ -63,6 +71,7 @@ const Videos = ({ videos }) => {
                 // element could not enter fullscreen mode
             });
     }
+
     const exitFullScreen = () => {
         document.exitFullscreen()
             .then(function () {
@@ -73,17 +82,28 @@ const Videos = ({ videos }) => {
                 // element could not enter fullscreen mode
             });
     }
+    const play = () => {
+        var video = document.getElementById("videoBox");
+        video.play();
+        setOnPlay(true);
+    }
+    const pause = () => {
+        var video = document.getElementById("videoBox");
+        video.pause();
+        setOnPlay(false);
 
+    }
     // Insertar vídeos en HTML5. La etiqueta ˂video˃ | | UPV - Elementos de la etiqueta video
     // https://www.youtube.com/watch?v=yHyj6o56AlM&ab_channel=UniversitatPolit%C3%A8cnicadeVal%C3%A8ncia-UPV
 
-    return (
+     return (
         <div className="list-group">
             <div id="container-video"
                 style={{
                     width: "300px", height: "150px", left: "0px", top: "0px",
                     justifyContent: "center", textAlign: "center", position: "relative"
-                }}>
+                }}        
+            >
 
                 {
                     select && select.data && (
@@ -91,7 +111,7 @@ const Videos = ({ videos }) => {
                             style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
                             key={select.data._id}
                         >
-                            <div>
+                            <div className="play-videos">
                                 <div style={{
                                     zIndex: 1, position: "absolute", minWidth: "100%"
                                 }}>
@@ -104,36 +124,55 @@ const Videos = ({ videos }) => {
 
                                 <div style={{
                                     zIndex: 1, position: "absolute", top: "90%", minWidth: "100%"
-                                }}>
+                                }}
+                                className="controls-video"
+                                >
                                     <button type="button" style={{ zIndex: 1, position: "relative" }}
                                         className="btn btn-outline-primary"
                                         onClick={setPrev}
-                                    >Prev</button>
+                                    >⏮️</button>
+                                    {/* debe estar afuera del reproductor */}
 
-                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                        className="btn btn-outline-primary"
-                                        onClick={changeMuted}
-                                    >Mute</button>
-
-                                    {fullscreen &&
+                                    {!onPlay &&
                                         <button type="button" style={{ zIndex: 1, position: "relative" }}
                                             className="btn btn-outline-primary"
-                                            onClick={exitFullScreen}
-                                        >Exit</button>}
+                                            id="play-button"
+                                            onClick={play}
+                                        >▶️</button>}
+
+                                    {onPlay &&
+                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                            className="btn btn-outline-primary"
+                                            onClick={pause}
+                                        ><b>⏸️</b></button>}
+
+
 
                                     {!fullscreen &&
                                         <button type="button" style={{ zIndex: 1, position: "relative" }}
                                             className="btn btn-outline-primary"
                                             onClick={fullScreen}
-                                        >Fullscreen</button>}
+                                        ><b>⮔</b></button>}
+                                    {fullscreen &&
+                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                            className="btn btn-outline-primary"
+                                            onClick={exitFullScreen}
+                                        ><b>X</b></button>}
+
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={changeMuted}
+                                    >{muted ? "🔇" : "🔊"}</button>
 
                                     <button type="button" style={{ zIndex: 1, position: "relative" }}
                                         className="btn btn-outline-primary"
                                         onClick={setNext}
-                                    >Next</button>
+                                    >⏭️</button>
+                                     {/* debe estar afuera del reproductor */}
                                 </div>
 
                                 <video tabIndex="-1" className="video-stream html5-main-video"
+                                    id="videoBox"
                                     controlsList="nodownload"
                                     style={{
                                         maxWidth: "100%", MaxHeight: "100%",
@@ -141,9 +180,11 @@ const Videos = ({ videos }) => {
                                         top: "0px"
                                     }}
                                     autoPlay={true}
-                                    controls={true}
+                                    controls={false}
+                                    loop={true}
                                     muted={muted}
                                     src={select.data.url}
+                                    onClick={onPlay ? pause : play}
                                 >
 
                                 </video>
@@ -155,32 +196,7 @@ const Videos = ({ videos }) => {
                     )
                 }
 
-            </div>
-            
-            {/* <button style={{position: "absolute"}}
-            Name="ytp-fullscreen-button ytp-button" 
-            aria-keyshortcuts="f"
-            data-title-no-tooltip="Salir del modo de pantalla completa" 
-            aria-label="Salir del modo de pantalla completa keyboard shortcut f" 
-            title="Salir del modo de pantalla completa&nbsp;(f)"><svg 
-            height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                <g className="ytp-fullscreen-button-corner-2">
-                    <use className="ytp-svg-shadow" xlinkHref="#ytp-id-285">
-                        </use><path className="ytp-svg-fill" d="m 14,14 -4,0 0,2 6,0 0,-6 -2,0 0,4 0,0 z" 
-                        id="ytp-id-285"></path></g>
-                        <g className="ytp-fullscreen-button-corner-3">
-                            <use className="ytp-svg-shadow" xlinkHref="#ytp-id-286">
-                                </use><path className="ytp-svg-fill" d="m 22,14 0,-4 -2,0 0,6 6,0 0,-2 -4,0 0,0 z" 
-                                id="ytp-id-286"></path></g><g className="ytp-fullscreen-button-corner-0">
-                                    <use className="ytp-svg-shadow" xlinkHref="#ytp-id-287"></use>
-                                    <path className="ytp-svg-fill" d="m 20,26 2,0 0,-4 4,0 0,-2 -6,0 0,6 0,0 z" 
-                                    id="ytp-id-287"></path></g><g className="ytp-fullscreen-button-corner-1">
-                                        <use className="ytp-svg-shadow" xlinkHref="#ytp-id-288"></use><path 
-                                        class="ytp-svg-fill" d="m 10,22 4,0 0,4 2,0 0,-6 -6,0 0,2 0,0 z" 
-                                        id="ytp-id-288"></path></g></svg></button> */}
-
-                      
-
+            </div>         
         </div>
     )
 }

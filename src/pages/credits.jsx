@@ -5,24 +5,25 @@ import Link from 'next/link'
 
 const Credits = () => {
     return (
-        <div className={styles.container}>
+        <div className={styles.mainContainer}>
             <Container>
                 <Head>
                     <title>Credits</title>
-                </Head>
-                <h2>Credits</h2>
+                </Head>           
             </Container>
-
 
             <main className={styles.main}>
                 <h3 className={styles.title}>
-                    Created by Fernando
+                    Credits
                 </h3>
-                <Link href="https://www.linkedin.com/in/fernando-segovia-dev/">
-                    <a className="nav-link" target="_blank">LinkedIn profile</a>
-                </Link>
 
-
+                <div className={styles.grid}>
+                    Created by Fernando           
+                                   
+                    <Link href="https://www.linkedin.com/in/fernando-segovia-dev/">
+                        <a className="nav-link" target="_blank">LinkedIn profile</a>
+                    </Link>
+                </div>
             </main>
 
             <footer className={styles.footer}>

@@ -2,15 +2,14 @@ import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Container from '../components/container'
 
+
 const Index = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.mainContainer}>
       <Container>
         <Head>
           <title>Landing page</title>
         </Head>
-        <h2>Landing page</h2>
-        <p>It's the landing page.</p>
       </Container>
 
       <main className={styles.main}>
@@ -19,13 +18,9 @@ const Index = () => {
         </h1>
 
         <p className={styles.description}>
-         Please click the button<code className={styles.code}>Home</code>
-         to start
+          Please click the button<code className={styles.code}>Home</code>
+          to start
         </p>
-{/* 
-        <div className={styles.grid}>
-          <h2>Deploy is running</h2>
-        </div> */}
       </main>
 
       <footer className={styles.footer}>

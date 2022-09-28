@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 const Container = (props) => {
     return (
-        <div>
+        <div className="headContainer">
             <Head>
                 <title>
                     Next js project
@@ -11,7 +11,7 @@ const Container = (props) => {
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cerulean/bootstrap.min.css" />
             </Head>
             <Navigation />
-            <div className="container p-4">
+            <div className="">
                 {props.children}
             </div>
         </div>
