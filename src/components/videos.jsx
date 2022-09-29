@@ -96,13 +96,13 @@ const Videos = ({ videos }) => {
     // Insertar vídeos en HTML5. La etiqueta ˂video˃ | | UPV - Elementos de la etiqueta video
     // https://www.youtube.com/watch?v=yHyj6o56AlM&ab_channel=UniversitatPolit%C3%A8cnicadeVal%C3%A8ncia-UPV
 
-     return (
+    return (
         <div className="list-group">
             <div id="container-video"
                 style={{
                     width: "auto", height: "500px", left: "0px", top: "0px",
                     justifyContent: "center", textAlign: "center", position: "relative"
-                }}        
+                }}
             >
 
                 {
@@ -111,93 +111,94 @@ const Videos = ({ videos }) => {
                         //     style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
                         //     key={select.data._id}
                         // >
-                            <div className="play-videos" style={!fullscreen ? { height: "100%", background: "black" }
-                            : { height: "100vh", background: "black" }}
-                            >
-                                <div style={{
-                                    zIndex: 1, position: "absolute", minWidth: "100%", minHeight: "auto",
-                                }}>
-                                    <h5
-                                    >{select.data.title} {select.index}  </h5>
+                        <div className="play-videos"
+                            style={!fullscreen ? { height: "100%", background: "black" }
+                                : { height: "100vh", background: "black" }}
+                        >
+                            <div style={{
+                                zIndex: 1, position: "absolute", minWidth: "100%", minHeight: "auto",
+                            }}>
+                                <h5
+                                >{select.data.title} {select.index}  </h5>
 
-                                    <h6
-                                    >Description: {select.data.description}</h6>
-                                </div>
-
-                                <div style={{
-                                    zIndex: 1, position: "absolute", top: "90%", minWidth: "100%"
-                                }}
-                                className="controls-video"
-                                >
-                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                        className="btn btn-outline-primary"
-                                        onClick={setPrev}
-                                    >⏮️</button>
-                                    {/* debe estar afuera del reproductor */}
-
-                                    {!onPlay &&
-                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                            className="btn btn-outline-primary"
-                                            id="play-button"
-                                            onClick={play}
-                                        >▶️</button>}
-
-                                    {onPlay &&
-                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                            className="btn btn-outline-primary"
-                                            onClick={pause}
-                                        ><b>⏸️</b></button>}
-
-
-
-                                    {!fullscreen &&
-                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                            className="btn btn-outline-primary"
-                                            onClick={fullScreen}
-                                        ><b>⮔</b></button>}
-                                    {fullscreen &&
-                                        <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                            className="btn btn-outline-primary"
-                                            onClick={exitFullScreen}
-                                        ><b>X</b></button>}
-
-                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                        className="btn btn-outline-primary"
-                                        onClick={changeMuted}
-                                    >{muted ? "🔇" : "🔊"}</button>
-
-                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
-                                        className="btn btn-outline-primary"
-                                        onClick={setNext}
-                                    >⏭️</button>
-                                     {/* debe estar afuera del reproductor */}
-                                </div>
-
-                                <video tabIndex="-1" className="video-stream html5-main-video"
-                                    id="videoBox"
-                                    controlsList="nodownload"
-                                    style={{
-                                        maxWidth: "100%", height:"100%", 
-                                        left: "0px", top: "0px"
-                                    }}
-                                    autoPlay={true}
-                                    controls={false}
-                                    loop={true}
-                                    muted={muted}
-                                    src={select.data.url}
-                                    onClick={onPlay ? pause : play}
-                                >
-
-                                </video>
-
+                                <h6
+                                >Description: {select.data.description}</h6>
                             </div>
+
+                            <div style={{
+                                zIndex: 1, position: "absolute", top: "90%", minWidth: "100%"
+                            }}
+                                className="controls-video"
+                            >
+                                <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                    className="btn btn-outline-primary"
+                                    onClick={setPrev}
+                                >⏮️</button>
+                                {/* debe estar afuera del reproductor */}
+
+                                {!onPlay &&
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        id="play-button"
+                                        onClick={play}
+                                    >▶️</button>}
+
+                                {onPlay &&
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={pause}
+                                    ><b>⏸️</b></button>}
+
+
+
+                                {!fullscreen &&
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={fullScreen}
+                                    ><b>⮔</b></button>}
+                                {fullscreen &&
+                                    <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                        className="btn btn-outline-primary"
+                                        onClick={exitFullScreen}
+                                    ><b>X</b></button>}
+
+                                <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                    className="btn btn-outline-primary"
+                                    onClick={changeMuted}
+                                >{muted ? "🔇" : "🔊"}</button>
+
+                                <button type="button" style={{ zIndex: 1, position: "relative" }}
+                                    className="btn btn-outline-primary"
+                                    onClick={setNext}
+                                >⏭️</button>
+                                {/* debe estar afuera del reproductor */}
+                            </div>
+
+                            <video tabIndex="-1" className="video-stream html5-main-video"
+                                id="videoBox"
+                                controlsList="nodownload"
+                                style={{
+                                    maxWidth: "100%", height: "100%",
+                                    left: "0px", top: "0px"
+                                }}
+                                autoPlay={true}
+                                controls={false}
+                                loop={true}
+                                muted={muted}
+                                src={select.data.url}
+                                onClick={onPlay ? pause : play}
+                            >
+
+                            </video>
+
+                        </div>
 
                         // </div>
 
                     )
                 }
 
-            </div>         
+            </div>
         </div>
     )
 }

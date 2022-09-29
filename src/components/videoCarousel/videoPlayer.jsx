@@ -60,6 +60,12 @@ const VideoPlayer = ({
 
     return (
         <>
+        <div id="container-video"
+                style={{
+                    width: "auto", height: "400px", left: "0px", top: "0px",
+                    justifyContent: "center", textAlign: "center", position: "relative"
+                }}
+            >      
 
             <div className="play-video"
                 style={!fullscreen ? { height: "100%", background: "black" }
@@ -114,6 +120,7 @@ const VideoPlayer = ({
                     onClick={() => onPlay.state ? pause(video._id) : play(video._id)}
                 >
                 </video>}
+            </div>
             </div>
         </>
     )
