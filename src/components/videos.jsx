@@ -111,11 +111,11 @@ const Videos = ({ videos }) => {
                         //     style={{ padding: 0, margin: 0, background: "black", position: "relative" }}
                         //     key={select.data._id}
                         // >
-                            <div className="play-videos" style={{
-                               minWidth: "100%", minHeight: "100%", maxHeight: "100 vh"
-                            }}>
+                            <div className="play-videos" style={!fullscreen ? { height: "100%", background: "black" }
+                            : { height: "100vh", background: "black" }}
+                            >
                                 <div style={{
-                                    zIndex: 1, position: "absolute", minWidth: "100%", minHeight: "100%",
+                                    zIndex: 1, position: "absolute", minWidth: "100%", minHeight: "auto",
                                 }}>
                                     <h5
                                     >{select.data.title} {select.index}  </h5>
@@ -177,8 +177,8 @@ const Videos = ({ videos }) => {
                                     id="videoBox"
                                     controlsList="nodownload"
                                     style={{
-                                        maxWidth: "100%", maxHeight:"100%", left: "0px",
-                                        top: "0px"
+                                        maxWidth: "100%", height:"100%", 
+                                        left: "0px", top: "0px"
                                     }}
                                     autoPlay={true}
                                     controls={false}
