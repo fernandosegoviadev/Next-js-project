@@ -100,7 +100,7 @@ const Videos = ({ videos }) => {
         <div className="list-group">
             <div id="container-video"
                 style={{
-                    width: "auto", height: "500px", left: "0px", top: "0px",
+                    width: "auto", height: "400px", left: "0px", top: "0px",
                     justifyContent: "center", textAlign: "center", position: "relative"
                 }}
             >
