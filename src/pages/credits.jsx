@@ -9,20 +9,23 @@ const Credits = () => {
             <Container>
                 <Head>
                     <title>Credits</title>
-                </Head>           
+                </Head>
             </Container>
 
             <main className={styles.main}>
-                <h3 className={styles.title}>
-                    Credits
-                </h3>
+                <div>
+                    <h3 className={styles.title}>
+                        Credits
+                    </h3>
 
-                <div className={styles.grid}>
-                    Created by Fernando           
-                                   
-                    <Link href="https://www.linkedin.com/in/fernando-segovia-dev/">
-                        <a className="nav-link" target="_blank">LinkedIn profile</a>
-                    </Link>
+                    <div className={styles.grid}>
+                        Created by Fernando
+
+                        <Link href="https://www.linkedin.com/in/fernando-segovia-dev/">
+                            <a className="nav-link" target="_blank">LinkedIn profile</a>
+                        </Link>
+                    </div>
+
                 </div>
             </main>
 

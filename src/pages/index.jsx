@@ -13,14 +13,17 @@ const Index = () => {
       </Container>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to Next js project!
-        </h1>
+        <div>
+          <h1 className={styles.title}>
+            Welcome to Next js project!
+          </h1>
 
-        <p className={styles.description}>
-          Please click the button<code className={styles.code}>Home</code>
-          to start
-        </p>
+          <p className={styles.description}>
+            Please click the button<code className={styles.code}>Home</code>
+            to start
+          </p>
+
+        </div>
       </main>
 
       <footer className={styles.footer}>
