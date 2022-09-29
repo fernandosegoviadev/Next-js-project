@@ -16,6 +16,7 @@ const Medias = ({ videos }) => {
     const [muted, setMuted] = useState(true);
     const [fullscreen, setFullscreen] = useState(false);
     const [onPlay, setOnPlay] = useState({ state: true, id: '' });
+    const [autoplay, setAutoplay] = useState(true)
 
 
     const pause = (id) => {
@@ -23,6 +24,7 @@ const Medias = ({ videos }) => {
         if (video) {
             video.pause();
             setOnPlay({ state: false, id: id });
+            setAutoplay(false)
         }
     }
     const play = (id) => {
@@ -31,23 +33,21 @@ const Medias = ({ videos }) => {
         if (video) {
             video.play();
             setOnPlay({ state: true, id: id });
-
+            setAutoplay(true)
         }
     }
 
     const changeVideo = (index) => {
 
         if (onPlay.state) {
-            console.log(index,' el index');
-    
+            console.log(index, ' el index');
+
             if (onPlay.state && onPlay.id) {
                 pause(onPlay.id);
-            }        
-    
+            }
             let id = videos[index]._id // el id
             play(id);
-            setOnPlay({state: true, id: id})
-
+            setOnPlay({ state: true, id: id })
         }
 
     }
@@ -87,7 +87,8 @@ const Medias = ({ videos }) => {
                                     setFullscreen={setFullscreen}
                                     onPlay={onPlay}
                                     setOnPlay={setOnPlay}
-                                 
+                                    autoplay={autoplay}
+
                                 />
                             </SwiperSlide>
                         )

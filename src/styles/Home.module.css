@@ -3,7 +3,7 @@
 }
 
 .mainContainer {
-  min-height: 80vh;
+  min-height: 100vh;
   padding: 1rem 0;
   padding-bottom: 3rem;
   flex: 1;
@@ -13,6 +13,22 @@
   align-items: center;
 }
 
+.main {
+  /* background-color: #00f375; */
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.grid {
+  /* background-color: #0070f3; */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
 
 .footer {
   display: flex;

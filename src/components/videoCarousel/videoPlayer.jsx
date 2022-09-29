@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { useEffect } from "react";
 import React from "react";
 
 
 const VideoPlayer = ({
-    video, muted, setMuted, fullscreen, setFullscreen, onPlay, setOnPlay,
+    video, muted, setMuted, fullscreen, setFullscreen, onPlay, setOnPlay, autoplay
     }) => {
     // console.log(video, 'video por props')
 
@@ -64,7 +63,7 @@ const VideoPlayer = ({
 
             <div className="play-video"
                 style={!fullscreen ? { height: "100%", background: "black" }
-                    : { height: "auto", background: "black" }}>
+                    : { height: "100vh", background: "black" }}>
                 <div style={{
                     zIndex: 1, position: "absolute", top: "10%", minWidth: "100%"
                 }}
@@ -107,7 +106,7 @@ const VideoPlayer = ({
                         maxWidth: "100%", height: "100%",
                         left: "0px", top: "0px"
                     }}
-                    autoPlay={true}
+                    autoPlay={autoplay}
                     controls={false}
                     loop={true}
                     muted={muted}
